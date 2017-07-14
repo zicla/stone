@@ -9,7 +9,6 @@ type Token struct {
 var EOF Token = Token{-1}
 
 const EOL string = "\\n"
-const TestString = "Very good";
 
 
 func (t *Token) GetLineNumber() int {

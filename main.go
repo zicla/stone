@@ -1,18 +1,8 @@
 package main
-import (
-	"fmt"
-	"stone/input"
-)
+
+import "stone/model"
 
 func main() {
-
-	fmt.Println("--- Try to get text from console. ---")
-
-	str := input.GetConsoleInputText();
-	fmt.Println(str)
-	fmt.Println("--- Finish it ---")
-
-
-
-
+	lexer := model.Lexer{}
+	lexer.ReadLine("inta=100;")
 }
