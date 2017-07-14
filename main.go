@@ -10,7 +10,9 @@ func main() {
 
 	str := input.GetConsoleInputText();
 	fmt.Println(str)
-	fmt.Println("--- Finish ---")
+	fmt.Println("--- Finish it ---")
+
+
 
 
 }
