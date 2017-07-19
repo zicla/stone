@@ -20,11 +20,11 @@ func (l *Lexer) ReadLine(line string) {
 	all := reg.FindAllString(line, -1)
 	fmt.Printf("%q\n", all)
 
-	//allIndex := reg.FindAllStringIndex(line, -1);
-	//for _, v := range allIndex {
-	//	fmt.Println(v)
-	//}
-	//
+	allIndex := reg.FindAllStringIndex(line, -1);
+	for _, v := range allIndex {
+		fmt.Println(v)
+	}
+
 	subMatch := reg.FindAllSubmatch([]byte(line), -1)
 	fmt.Println("FindSubmatch", subMatch)
 	for i, v := range subMatch {
