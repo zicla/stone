@@ -21,6 +21,11 @@ func (l *Lexer) ReadLine(line string) {
 	fmt.Printf("%q\n", all)
 
 	allIndex := reg.FindAllStringIndex(line, -1);
+
+
+	//判断是不是每个部分都是连贯的。
+
+
 	for _, v := range allIndex {
 		fmt.Println(v)
 	}
