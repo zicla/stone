@@ -1,13 +1,13 @@
 package main
 
 import (
-	"stone/model"
 	"fmt"
 	"stone/input"
+	"stone/model/lex"
 )
 
 func main() {
-	lexer := model.NewLexer();
+	lexer := lex.NewLexer()
 
 	/*
 

@@ -1,4 +1,4 @@
-package model
+package lex
 
 type IdToken struct {
 	Token
