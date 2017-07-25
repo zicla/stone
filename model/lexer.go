@@ -4,6 +4,7 @@ import (
 	"regexp"
 	"fmt"
 	"errors"
+	"strconv"
 )
 
 type Lexer struct {
@@ -14,9 +15,7 @@ func NewLexer() *Lexer {
 	return &Lexer{queue: make([]IToken, 0, 10)}
 }
 
-func (lexer Lexer) ReadLine(line string) (err error) {
-
-	lexer.queue = append(lexer.queue, IdToken{})
+func (lexer *Lexer) ReadLine(line string) (err error) {
 
 	//空格 \s*
 	// 注释 //
@@ -61,15 +60,27 @@ func (lexer Lexer) ReadLine(line string) (err error) {
 				case 2:
 					fmt.Println("数字：")
 					fmt.Println(string(v1))
+
+					value, err := strconv.Atoi(string(v1))
+					if err == nil {
+						lexer.queue = append(lexer.queue, NewNumToken(value))
+					} else {
+						return err
+					}
+
 				case 3:
 					fmt.Println("字符串：")
 					fmt.Println(string(v1))
+
+					lexer.queue = append(lexer.queue, NewStrToken(string(v1)))
 				case 4:
 					fmt.Println("未知的内容：")
 					fmt.Println(string(v1))
 				case 5:
 					fmt.Println("标识符：")
 					fmt.Println(string(v1))
+
+					lexer.queue = append(lexer.queue, NewIdToken(string(v1)))
 				}
 
 			}
