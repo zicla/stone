@@ -22,15 +22,15 @@ func (lexer *Lexer) ReadLine(line string) (err error) {
 	// 字符串 "(\\"|\\\\|\\n|[^"])*" 里面可以是 \" 或 \\ 或 \n 或 非"的任何字符
 	// 标识符 [A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\|\| 不以数字开头 或 == 或 <= 或 >= 或 && 或 || 或
 	// !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~ => !"#\$%&'\(\)\*\+,-\./:;<=>\?@\[\\\]\^_`\{\|\}~
-	reg, _ := regexp.Compile(`\s*(//.*)|([0-9]+)|("(\\"|\\\\|\\n|[^"])*")|([A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|&&|\|\||[\=\+\-\*\/\(\)\{\}\[\]\|\&\~\?\:\.\%\#\@\;])`)
+	reg, _ := regexp.Compile(`\s*(//.*)|([0-9]+)|("(\\"|\\\\|\\n|[^"])*")|([A-Z_a-z][A-Z_a-z0-9]*|==|<=|>=|>|<|&&|\|\||[\=\+\-\*\/\(\)\{\}\[\]\|\&\~\?\:\.\%\#\@\;])`)
 
 	//从 pos 到 lineLength 一直搜索.
 	lineLength := len(line);
 	startIndex := 0;
-	fmt.Printf("start to search: length = %d\n", lineLength)
+	//fmt.Printf("start to search: length = %d\n", lineLength)
 	for startIndex < lineLength {
 
-		fmt.Printf("startIndex => %d\n", startIndex);
+		//fmt.Printf("startIndex => %d\n", startIndex);
 		searchStr := line[startIndex:];
 		subMatch := reg.FindSubmatch([]byte(searchStr))
 
@@ -51,7 +51,7 @@ func (lexer *Lexer) ReadLine(line string) (err error) {
 				return err
 			}
 
-			fmt.Printf("match start: %d end: %d\n", startIndex+subMatchIndex[0], startIndex+subMatchIndex[1])
+			//fmt.Printf("match start: %d end: %d\n", startIndex+subMatchIndex[0], startIndex+subMatchIndex[1])
 			startIndex += subMatchIndex[1]
 		}
 
@@ -61,11 +61,11 @@ func (lexer *Lexer) ReadLine(line string) (err error) {
 
 				switch k1 {
 				case 1:
-					fmt.Println("注释：")
-					fmt.Println(string(v1))
+					//fmt.Println("注释：")
+					//fmt.Println(string(v1))
 				case 2:
-					fmt.Println("数字：")
-					fmt.Println(string(v1))
+					//fmt.Println("数字：")
+					//fmt.Println(string(v1))
 
 					value, err := strconv.Atoi(string(v1))
 					if err == nil {
@@ -75,16 +75,16 @@ func (lexer *Lexer) ReadLine(line string) (err error) {
 					}
 
 				case 3:
-					fmt.Println("字符串：")
-					fmt.Println(string(v1))
+					//fmt.Println("字符串：")
+					//fmt.Println(string(v1))
 
 					lexer.queue = append(lexer.queue, NewStrToken(string(v1)))
 				case 4:
-					fmt.Println("未知的内容：")
-					fmt.Println(string(v1))
+					//fmt.Println("未知的内容：")
+					//fmt.Println(string(v1))
 				case 5:
-					fmt.Println("标识符：")
-					fmt.Println(string(v1))
+					//fmt.Println("标识符：")
+					//fmt.Println(string(v1))
 
 					lexer.queue = append(lexer.queue, NewIdToken(string(v1)))
 				}
@@ -93,7 +93,7 @@ func (lexer *Lexer) ReadLine(line string) (err error) {
 
 		}
 
-		fmt.Println()
+		//fmt.Println()
 	}
 
 	return nil
