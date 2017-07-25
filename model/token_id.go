@@ -5,10 +5,10 @@ type IdToken struct {
 	Text string
 }
 
-func (i *IdToken) IsIdentifier() bool {
+func (i IdToken) IsIdentifier() bool {
 	return true;
 }
 
-func (i *IdToken) GetText() string {
+func (i IdToken) GetText() string {
 	return i.Text
 }

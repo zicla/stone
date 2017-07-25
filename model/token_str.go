@@ -5,10 +5,10 @@ type StrToken struct {
 	Literal string
 }
 
-func (s *StrToken) IsString() bool {
+func (s StrToken) IsString() bool {
 	return true;
 }
 
-func (s *StrToken) GetText() string {
+func (s StrToken) GetText() string {
 	return s.Literal
 }

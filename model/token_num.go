@@ -7,10 +7,10 @@ type NumToken struct {
 	Value int
 }
 
-func (n *NumToken) IsNumber() bool {
+func (n NumToken) IsNumber() bool {
 	return true;
 }
 
-func (n *NumToken) GetText() string {
+func (n NumToken) GetText() string {
 	return strconv.Itoa(n.Value)
 }
