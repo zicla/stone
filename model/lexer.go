@@ -35,6 +35,12 @@ func (lexer *Lexer) ReadLine(line string) (err error) {
 		subMatch := reg.FindSubmatch([]byte(searchStr))
 
 		if subMatchIndex := reg.FindStringIndex(searchStr); subMatchIndex == nil {
+
+			if isSpace, _ := regexp.Match(`^\s*$`, []byte(searchStr)); !isSpace {
+				err = errors.New(searchStr + "语法错误")
+				return err
+			}
+
 			break
 		} else {
 
@@ -91,4 +97,11 @@ func (lexer *Lexer) ReadLine(line string) (err error) {
 	}
 
 	return nil
+}
+
+
+func (lexer *Lexer) PrintQueue() {
+	for _, v := range lexer.queue {
+		fmt.Printf("=> %s\n", v.GetText())
+	}
 }
